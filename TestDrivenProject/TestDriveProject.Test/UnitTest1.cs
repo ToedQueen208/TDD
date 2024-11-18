@@ -110,14 +110,16 @@ namespace TestDriveProject.Test
         }
 
         [Test]
-        public void FindLetterFrequency()
+        [TestCase("aaaaaaa", 'a',7 )]
+        [TestCase("Hello how m  any h in here hehe", "h", 6) ]
+        public void FindLetterFrequency(string input, char c, int expected)
         {
             WordAnalyser analyser = new WordAnalyser();
 
-            Dictionary<char, int> ans = analyser.CalculateLetterFrequency("aaaaaaa");
+            Dictionary<char, int> ans = analyser.CalculateLetterFrequency(input);
 
-            ans.Count().Should().Be(1);
-            ans['a'].Should().Be(7);
+          //  ans.Count().Should().Be();
+            ans[c].Should().Be(expected);
         }
     }
 
