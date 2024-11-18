@@ -12,6 +12,5 @@ namespace TestDrivenProject
         EAST,
         SOUTH,
         WEST,
-
     }
 }
