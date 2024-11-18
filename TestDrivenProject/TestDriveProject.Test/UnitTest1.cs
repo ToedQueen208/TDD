@@ -58,5 +58,34 @@ namespace TestDriveProject.Test
                 ClassicAssert.AreEqual(testCompass.Point, expectedPoint);
             });
         }
+
+        [Test, Description ("Testing if string is reversed")]
+        [TestCase ("adasw","wsada")]
+        [TestCase ("qw12er", "re21wq")]
+        public void ReverseString(string input, string expected)
+        {
+            StringManipulator testManipulator = new StringManipulator();
+
+            var stringAns = testManipulator.ReverseString(input);
+
+            stringAns.Should().Be(expected);
+
+
+        }
+        
+        [Test]
+        [TestCase ("asd", false)]
+        [TestCase ("Eevee", true)]
+        public void isPalindrome(string input, bool expected)
+        {
+
+            StringManipulator testManipulator = new StringManipulator();
+
+            var stringAns = testManipulator.IsPalindrome(input);
+
+            stringAns.Should().Be(expected);
+        }
+    
     }
+
 }
