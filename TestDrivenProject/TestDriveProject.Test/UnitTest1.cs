@@ -95,29 +95,29 @@ namespace TestDriveProject.Test
         [TestCase("123 45 !! jf kj .", "123")]
         [TestCase("there words biggg        bad", "there words biggg")]
         [TestCase("alll word same leng", "alll word same leng")]
-       
+
         public void FindLongestWord(string input, string expected)
         {
-            string[] parts =  expected.Split(' ');
+            string[] parts = expected.Split(' ');
             WordAnalyser analyser = new WordAnalyser();
             List<string> ans = analyser.FindLongestWords(input);
 
             ans.Count().Should().Be(parts.Count());
             for (int i = 0; i < parts.Count(); i++) {
                 ans[i].Should().Be(parts[i]);
-            }          
+            }
         }
 
         [Test]
-        [TestCase("aaaaaaa", 'a',7 )]
-        [TestCase("Hello how m  any h in here hehe", "h", 6) ]
+        [TestCase("aaaaaaa", 'a', 7)]
+        [TestCase("Hello how m  any h in here hehe", "h", 6)]
         public void FindLetterFrequency(string input, char c, int expected)
         {
             WordAnalyser analyser = new WordAnalyser();
 
             Dictionary<char, int> ans = analyser.CalculateLetterFrequency(input);
 
-          //  ans.Count().Should().Be();
+            //  ans.Count().Should().Be();
             ans[c].Should().Be(expected);
         }
 
@@ -159,6 +159,40 @@ namespace TestDriveProject.Test
             cart.AddItem("testitem5", 3.0);
             total = cart.CalculateTotal();
             total.Should().Be(25.5);
+        }
+
+        [Test]
+        [TestCase(0.546, 0.546)]
+        [TestCase(-0.1, 0.0)]
+        [TestCase(0.0, 0.0)]
+        [TestCase(1.5, 1.0)]
+        public void ApplyDiscount(double discount, double expected)
+        {
+            ShoppingCart cart = new ShoppingCart();
+            cart.ApplyDiscount(discount);
+            cart.Discount.Should().Be(expected);
+        }
+
+        [Test]
+        [TestCase(100, 0.1, 90)]
+        [TestCase(50, 0.05, 47.5)]
+        [TestCase(0.0, 0.0, 0.0)]
+        [TestCase(1.5, 1.0, 0.0)]
+        public void CalculateDiscount(double originalPrice, double discountRate, double expectedPrice)
+        {
+            ShoppingCart cart = new ShoppingCart();
+            double newPrice = cart.CalculateDiscount(originalPrice, discountRate);
+            newPrice.Should().Be(expectedPrice);
+        }
+
+        [Test]
+        public void CalculateItemDiscount()
+        {
+            ShoppingCart cart = new ShoppingCart();
+            cart.AddItem("testitem", 12.0);
+            cart.ApplyDiscount(0.5);
+            Dictionary<string, double> items = cart.GetItems();
+            cart.CalculateDiscount(items["testitem"], cart.Discount).Should().Be(6.0);
         }
     }
 

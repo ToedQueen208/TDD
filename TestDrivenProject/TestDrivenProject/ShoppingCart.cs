@@ -8,6 +8,7 @@ namespace TestDrivenProject
 {
     public class ShoppingCart
     {
+        public double Discount;
         private Dictionary<string, double> items = new();
 
         public ShoppingCart()
@@ -32,6 +33,16 @@ namespace TestDrivenProject
                 total += entry.Value;
             }
             return total;
+        }
+        public void ApplyDiscount(double discount)
+        {
+            if (discount < 0) discount = 0;
+            if (discount > 1) discount = 1;
+            Discount = discount;
+        }
+        public double CalculateDiscount(double originalPrice, double discountRate)
+        {
+            return originalPrice - (originalPrice * discountRate);
         }
     }
 }
