@@ -39,6 +39,7 @@ namespace TestDrivenProject
 
         public Dictionary<char, int> CalculateLetterFrequency(string text)
         {
+            text = text.ToLower();
             Dictionary<char, int> dict = new();
             foreach (char c in text)
             {
