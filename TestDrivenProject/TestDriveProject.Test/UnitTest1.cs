@@ -1,5 +1,6 @@
 using FluentAssertions;
 using NUnit.Framework.Legacy;
+using System.Diagnostics;
 using TestDrivenProject;
 
 namespace TestDriveProject.Test
@@ -101,12 +102,10 @@ namespace TestDriveProject.Test
             WordAnalyser analyser = new WordAnalyser();
             List<string> ans = analyser.FindLongestWords(input);
 
-             ans.Count().Should().Be(parts.Count());
+            ans.Count().Should().Be(parts.Count());
             for (int i = 0; i < parts.Count(); i++) {
                 ans[i].Should().Be(parts[i]);
-            }
-           
-
+            }          
         }
 
         [Test]
@@ -120,6 +119,46 @@ namespace TestDriveProject.Test
 
           //  ans.Count().Should().Be();
             ans[c].Should().Be(expected);
+        }
+
+        [Test]
+        [TestCase("test", 20.65, "test", 20.65)]
+        [TestCase("anotheritem", -10.0, "anotheritem", 0)]
+        [TestCase("yetanotheritem", 50, "yetanotheritem", 50.0)]
+        public void AddItem(string item, double price, string expectedName, double exprectedPrice)
+        {
+            ShoppingCart cart = new ShoppingCart();
+
+            cart.AddItem(item, price);
+            Dictionary<string, double> ans = cart.GetItems();
+
+            ans[expectedName].Should().Be(exprectedPrice);
+        }
+
+        [Test]
+        public void CalculateTotal()
+        {
+            ShoppingCart cart = new ShoppingCart();
+
+            cart.AddItem("testitem1", 10.5);
+            double total = cart.CalculateTotal();
+            total.Should().Be(10.5);
+
+            cart.AddItem("testitem2", -10);
+            total = cart.CalculateTotal();
+            total.Should().Be(10.5);
+
+            cart.AddItem("testitem3", 2.0);
+            total = cart.CalculateTotal();
+            total.Should().Be(12.5);
+
+            cart.AddItem("testitem4", 10.0);
+            total = cart.CalculateTotal();
+            total.Should().Be(22.5);
+
+            cart.AddItem("testitem5", 3.0);
+            total = cart.CalculateTotal();
+            total.Should().Be(25.5);
         }
     }
 
