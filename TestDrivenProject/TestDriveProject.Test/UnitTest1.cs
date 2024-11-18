@@ -194,6 +194,35 @@ namespace TestDriveProject.Test
             Dictionary<string, double> items = cart.GetItems();
             cart.CalculateDiscount(items["testitem"], cart.Discount).Should().Be(6.0);
         }
-    }
 
+        [Test]
+        public void AddItemsToEmptyList()
+        {
+            ShoppingCart cart = new ShoppingCart();
+            cart.AddItem("testitem", 12.0);
+            Dictionary<string, double> items = cart.GetItems();
+            items["testitem"].Should().Be(12.0);
+        }
+        [Test]
+        public void GetEmptyList()
+        {
+            ShoppingCart cart = new ShoppingCart();
+            Dictionary<string, double> items = cart.GetItems();
+            items.Count().Should().Be(0);
+        }
+        public void CalculateEmptyList()
+        {
+            ShoppingCart cart = new ShoppingCart();
+            cart.CalculateTotal().Should().Be(0);
+        }
+        [Test]
+        public void PassMaxPrice()
+        {
+            ShoppingCart cart = new ShoppingCart();
+            cart.AddItem("expensiveItem", double.MaxValue + 1);
+            cart.AddItem("expensiveItem2", double.MaxValue + 2);
+            double total = cart.CalculateTotal();
+            total.Should().Be(double.MaxValue);
+        }
+    }
 }

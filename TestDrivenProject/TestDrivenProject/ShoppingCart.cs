@@ -11,11 +11,6 @@ namespace TestDrivenProject
         public double Discount;
         private Dictionary<string, double> items = new();
 
-        public ShoppingCart()
-        {
-            items.Add("Bueno", 0.00);
-        }
-
         public void AddItem(string name, double price)
         {
             if (price < 0) price = 0;
