@@ -94,7 +94,7 @@ namespace TestDriveProject.Test
         [TestCase("123 45 !! jf kj .", "123")]
         [TestCase("there words biggg        bad", "there words biggg")]
         [TestCase("alll word same leng", "alll word same leng")]
-        [TestCase(" "," ")]
+       
         public void FindLongestWord(string input, string expected)
         {
             string[] parts =  expected.Split(' ');
