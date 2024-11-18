@@ -1,5 +1,6 @@
+using FluentAssertions;
 using TestDrivenProject;
-using TestDriveProject;
+
 namespace TestDriveProject.Test
 
 {
@@ -15,8 +16,11 @@ namespace TestDriveProject.Test
             var testPoint = testCompass.Rotate(Point.NORTH, Direction.RIGHT);
             
             Console.WriteLine(testCompass.Point.ToString()) ;
-            Assert.Equals(Point.EAST, testPoint);
+
+
+           // Assert.Equals(Point.EAST, testPoint);
             //Point.EAST, testCompass.Point);
+            testPoint.Should().Be(Point.EAST);
     
         }
     }
