@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,19 +12,26 @@ namespace TestDrivenProject
     {
         public List<string> FindLongestWords(string text)
         {
+            Dictionary<string, int> wordLengths = new();
             string[] parts = text.Split(' ');
-            int longest = 0;
-            string longString = "";
-            List<string> ans = new List<string>();
+            int longestLength = Int32.MinValue;
+
             foreach (string part in parts)
             {
-                if (part.Length > longest)
+                int n = part.Length;
+                if (!wordLengths.ContainsKey(part)) wordLengths[part] = n;
+                longestLength = Math.Max(longestLength, n);
+            }
+
+            List<string> ans = new List<string>();
+
+            foreach (var entry in wordLengths)
+            {
+                if (entry.Value == longestLength)
                 {
-                    longString = part;
-                    longest = longString.Length;
+                    ans.Add(entry.Key);
                 }
             }
-            ans.Add(longString);
             return ans;
         }
 
