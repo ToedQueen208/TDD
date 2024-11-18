@@ -59,9 +59,9 @@ namespace TestDriveProject.Test
             });
         }
 
-        [Test, Description ("Testing if string is reversed")]
-        [TestCase ("adasw","wsada")]
-        [TestCase ("qw12er", "re21wq")]
+        [Test, Description("Testing if string is reversed")]
+        [TestCase("adasw", "wsada")]
+        [TestCase("qw12er", "re21wq")]
         public void ReverseString(string input, string expected)
         {
             StringManipulator testManipulator = new StringManipulator();
@@ -72,10 +72,10 @@ namespace TestDriveProject.Test
 
 
         }
-        
+
         [Test]
-        [TestCase ("asd", false)]
-        [TestCase ("Eevee", true)]
+        [TestCase("asd", false)]
+        [TestCase("Eevee", true)]
         public void isPalindrome(string input, bool expected)
         {
 
@@ -85,7 +85,33 @@ namespace TestDriveProject.Test
 
             stringAns.Should().Be(expected);
         }
-    
+
+        [Test]
+        //[Test, Description("Testing Longest Word")]
+        //[TestCase("what is the longest word here",  )]
+        //[TestCase("job", "job")]
+        //[TestCase("aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaa")]
+        //[TestCase("123 45 !! jf kj .", "123")]
+        public void FindLongestWord()
+        {
+            WordAnalyser analyser = new WordAnalyser();
+
+            List<string> ans = analyser.FindLongestWords("aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa");
+
+            ans.Count().Should().Be(1);
+            ans[0].Should().Be("aaaaaaaaaaaaaaaaaaaaaaaa");
+        }
+
+        [Test]
+        public void FindLetterFrequency()
+        {
+            WordAnalyser analyser = new WordAnalyser();
+
+            Dictionary<char, int> ans = analyser.CalculateLetterFrequency("aaaaaaa");
+
+            ans.Count().Should().Be(1);
+            ans['a'].Should().Be(7);
+        }
     }
 
 }
