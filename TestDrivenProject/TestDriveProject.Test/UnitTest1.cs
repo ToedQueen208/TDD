@@ -90,19 +90,19 @@ namespace TestDriveProject.Test
         //[Test, Description("Testing Longest Word")]
         [TestCase("what is the longest word here", "longest")]
         [TestCase("this is the jobs", "this jobs")]
-        //[TestCase("aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaa")]
-        //[TestCase("123 45 !! jf kj .", "123")]
+        [TestCase("aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaa")]
+        [TestCase("123 45 !! jf kj .", "123")]
+        [TestCase("there words biggg        bad", "there words biggg")]
+        [TestCase("alll word same leng", "alll word same leng")]
+       
         public void FindLongestWord(string input, string expected)
         {
             string[] parts =  expected.Split(' ');
-         
-          
             WordAnalyser analyser = new WordAnalyser();
-
             List<string> ans = analyser.FindLongestWords(input);
 
              ans.Count().Should().Be(parts.Count());
-            for (int i = 0; i < ans.Count(); i++) {
+            for (int i = 0; i < parts.Count(); i++) {
                 ans[i].Should().Be(parts[i]);
             }
            
