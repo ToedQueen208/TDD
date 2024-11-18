@@ -12,6 +12,7 @@ namespace TestDrivenProject
     {
         public List<string> FindLongestWords(string text)
         {
+            text = text.Trim();
             Dictionary<string, int> wordLengths = new();
             string[] parts = text.Split(' ');
             int longestLength = Int32.MinValue;
